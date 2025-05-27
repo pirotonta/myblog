@@ -11,7 +11,7 @@ use App\Models\User;
  */
 class PostFactory extends Factory
 {
-    
+
     protected $model = Post::class;
 
     public function definition()
@@ -24,5 +24,4 @@ class PostFactory extends Factory
             'content' => $this->faker->paragraphs(3, true),
         ];
     }
-
 }

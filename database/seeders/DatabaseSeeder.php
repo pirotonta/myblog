@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,13 +16,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // desactivar claves foraneas para poder truncar
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
+        // esto es para limpiar datos viejos
+        DB::table('comments')->truncate();
+        DB::table('posts')->truncate();
+        DB::table('users')->truncate();
+
+        // Crear usuarios con posts y comentarios
         User::factory()
-        ->count(5)
-        ->has(
-            Post::factory()->count(3)->hasComments(2)
-        )
-        ->create();
+            ->count(5)
+            ->has(
+                Post::factory()
+                    ->count(3)
+                    ->hasComments(2)
+            )
+            ->create();
     }
 }
