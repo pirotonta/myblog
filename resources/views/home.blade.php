@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="text-3xl font-bold mb-6 text-gray-800">Contenedor de inicio</h1>
+<h1 class="text-3xl font-bold mb-6">Contenedor de inicio</h1>
 
 <div class="max-w-4xl space-y-6">
     @foreach($posts as $post)

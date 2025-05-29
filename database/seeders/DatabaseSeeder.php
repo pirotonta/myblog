@@ -24,14 +24,19 @@ class DatabaseSeeder extends Seeder
         DB::table('posts')->truncate();
         DB::table('users')->truncate();
 
-        // Crear usuarios con posts y comentarios
-        User::factory()
-            ->count(5)
-            ->has(
-                Post::factory()
-                    ->count(3)
-                    ->hasComments(2)
-            )
-            ->create();
+        // // Crear usuarios con posts y comentarios
+        // User::factory()
+        //     ->count(5)
+        //     ->has(
+        //         Post::factory()
+        //             ->count(3)
+        //             ->hasComments(2)
+        //     )
+        //     ->create();
+
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
     }
 }

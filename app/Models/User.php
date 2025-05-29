@@ -22,8 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'rol',
-        'userImg',
-        'habilitado'
+        'imgUsuario',
+        'habilitado',
     ];
 
     /**
@@ -46,21 +46,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'habilitado' => 'boolean',
         ];
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'user_id');
-    }
-    
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'user_id');
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->rol === 'admin';
     }
 }
