@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -23,6 +24,12 @@ class DatabaseSeeder extends Seeder
         DB::table('comments')->truncate();
         DB::table('posts')->truncate();
         DB::table('users')->truncate();
+
+        $categories = ['mascotas', 'mepaso', 'musica', 'cine', 'offtopic'];
+
+        foreach ($categories as $name) {
+            Category::firstOrCreate(['name' => $name]);
+        }
 
         // Crear usuarios con posts y comentarios
         User::factory()

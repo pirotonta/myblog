@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -21,7 +22,8 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        $categorias = Category::all();
+        return view('posts.create', compact('categorias'));
     }
 
     public function edit($id)

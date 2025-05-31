@@ -59,6 +59,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'user_id');
     }
 
+    public function votes()
+    {
+    return $this->hasMany(Vote::class);
+    }
+
     public function isAdmin(): bool
     {
         return $this->rol === 'admin';

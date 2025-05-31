@@ -13,6 +13,15 @@
     </div>
 
     <div class="mb-4">
+        <label for="category_id">Categoria:</label>
+        <select name="category_id" id="category_id">
+            @foreach ($categorias as $categoria)
+            <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="mb-4">
         <label for="content" class="block text-gray-700 font-semibold mb-2">Contenido:</label>
         <textarea
             name="content"
