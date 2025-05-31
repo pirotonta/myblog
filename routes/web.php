@@ -2,18 +2,11 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'getHome'])->name('home');
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/signin', function () {
-    return view('signin');
-});
 
 Route::resource('posts', PostController::class);
 
@@ -26,3 +19,16 @@ Route::get('categories/{category}/posts', [PostController::class, 'index'])
 Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/vote', [PostController::class, 'vote'])->name('posts.vote');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// rutas de autenticación de usuarios
+require __DIR__ . '/auth.php';
