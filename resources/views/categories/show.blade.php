@@ -4,10 +4,14 @@ $user = auth()->user();
 @endphp
 
 @section('content')
-<h1 class="text-3xl font-bold mb-6">algunos posts al azar</h1>
+<h1 class="text-3xl font-bold mb-6 text-white-800">Posts en "{{ $category->name }}"</h1>
+<a href="{{ url('/posts/create') }}"
+    class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-5">
+    Crear post
+</a>
 
 <div class="max-w-4xl space-y-6">
-    @foreach($posts as $post)
+    @foreach ($posts as $post)
     @php
     $userVote = $user ? $post->userVote($user) : null;
     @endphp
@@ -16,12 +20,8 @@ $user = auth()->user();
             <form method="POST" action="{{ route('posts.vote', $post) }}">
                 @csrf
                 <input type="hidden" name="value" value="1">
-                <button type="submit"
-                    class="{{ $userVote && $userVote->value === 1 ? 'text-green-600 font-bold' : 'text-gray-400 hover:text-green-500' }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-arrow-big-up-icon">
+                <button type="submit" class="{{ $userVote && $userVote->value === 1 ? 'text-green-600 font-bold' : 'text-gray-400 hover:text-green-500' }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-up-icon lucide-arrow-big-up">
                         <path d="M9 18v-6H5l7-7 7 7h-4v6H9z" />
                     </svg>
                 </button>
@@ -34,12 +34,8 @@ $user = auth()->user();
             <form method="POST" action="{{ route('posts.vote', $post) }}">
                 @csrf
                 <input type="hidden" name="value" value="-1">
-                <button type="submit"
-                    class="{{ $userVote && $userVote->value === -1 ? 'text-red-700 font-bold' : 'text-gray-400 hover:text-red-600' }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-arrow-big-down-icon">
+                <button type="submit" class="{{ $userVote && $userVote->value === -1 ? 'text-red-700 font-bold' : 'text-gray-400 hover:text-red-600' }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-big-down-icon lucide-arrow-big-down">
                         <path d="M15 6v6h4l-7 7-7-7h4V6h6z" />
                     </svg>
                 </button>
@@ -57,18 +53,18 @@ $user = auth()->user();
                 </a>
             </div>
             <p class="text-gray-700 mb-3">{{ Str::limit($post->content, 150, '...') }}</p>
-            <p class="text-sm text-gray-500">
-                By: {{ $post->user->username }}
-            </p>
+            <p class="text-sm text-gray-500">By: {{ $post->user->username }}</p>
         </div>
 
-        <img src="{{ $post->thumbnail ?? $post->category->icon }}"
+
+        <img
+            src="{{ $post->thumbnail ?? $post->category->icon }}"
             alt="icon"
             class="w-25 h-25 rounded object-cover" />
     </article>
     @endforeach
     <div class="mt-6">
-        {{ $posts->links() }}
+    {{ $posts->links() }}
     </div>
 </div>
 @endsection

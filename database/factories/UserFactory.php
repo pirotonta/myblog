@@ -23,12 +23,58 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $sustantivos = [
+            'guiso',
+            'caniche',
+            'gatito',
+            'luna',
+            'mango',
+            'gato',
+            'yerba',
+            'queso',
+            'cibernauta',
+            'perrito',
+            'sandia',
+            'pepito',
+            'gomita',
+            'alfil',
+            'pollo',
+            'fideo',
+            'angel'
+        ];
+
+        $adjetivos = [
+            'picante',
+            'loco',
+            'triste',
+            'skibidi',
+            'salado',
+            'chiquito',
+            'nulo',
+            'pipi',
+            'copado',
+            'peludo',
+            'dulce',
+            'jugoso',
+            'lindo',
+            'fino',
+            'sabroso',
+            'iq'
+        ];
+
+        $sustantivo = fake()->randomElement($sustantivos);
+        $adjetivo = fake()->randomElement($adjetivos);
+        $number = fake()->numberBetween(1, 99);
+
+        $username = ucfirst($sustantivo) . ucfirst($adjetivo) . $number;
+
         return [
-            'name' => fake()->name(),
+            'username' => $username,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'profile_picture' => 'https://picsum.photos/200',
         ];
     }
 
