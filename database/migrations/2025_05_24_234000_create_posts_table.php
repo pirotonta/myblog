@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,8 +19,13 @@ return new class extends Migration
             $table->foreignIdFor(User::class)
                 ->constrained()
                 ->onDelete('restrict');
+            $table->foreignIdFor(Category::class)
+                ->constrained()
+                ->onDelete('cascade');
             $table->boolean('habilitated')->default(false);
             $table->string('thumbnail')->nullable();
+            $table->integer('rating')->default(0);
+            $table->integer('views')->default(0);
             $table->text('content');
             $table->timestamps();
         });
