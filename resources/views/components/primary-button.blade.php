@@ -4,11 +4,10 @@
         w-full
         px-4 py-2
         bg-transparent
-        border border-zinc-700
-        text-gray-300
+        border border-gray-600
+        text-white
+        hover:border-red-400
         rounded-md
-        hover:bg-zinc-800
-        hover:text-white
         transition ease-in-out duration-150
     ']) }}>
     {{ $slot }}

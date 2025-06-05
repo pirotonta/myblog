@@ -4,18 +4,18 @@
 <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="bg-zinc-900 p-6 rounded-lg shadow-md max-w-2xl mx-auto border border-zinc-700">
     @csrf
 
-    <h3 class="text-2xl font-bold text-white mb-6 text-center">Crear nuevo post</h3>
+    <h3 class="text-white text-center font-bold text-2xl mb-10">Crear nuevo post</h3>
 
     <div class="mb-4">
         <label for="title" class="block text-gray-300 font-semibold mb-2">Título:</label>
         <input type="text" name="title" id="title"
-            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
     </div>
 
     <div class="mb-4">
         <label for="category_id" class="block text-gray-300 font-semibold mb-2">Categoría:</label>
         <select name="category_id" id="category_id"
-            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
             @foreach ($categorias as $categoria)
             <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
             @endforeach
@@ -43,16 +43,16 @@
             name="content"
             id="content"
             rows="5"
-            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md resize-y focus:outline-none focus:ring-2 focus:ring-gray-500"></textarea>
     </div>
 
     <div class="flex justify-center gap-4 mt-6">
         <button type="submit"
-            class="w-32 bg-gray-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow transition">
+            class="w-32 border border-gray-500 cursor-pointer hover:border-red-400 text-white font-semibold py-2 px-4 rounded shadow transition">
             Publicar
         </button>
         <a href="{{ route('posts.index') }}"
-            class="w-32 hover:bg-blue-700 border border-bg-gray-400 text-white font-semibold py-2 px-4 rounded shadow text-center transition">
+            class="w-32 border border-gray-500 cursor-pointer hover:border-red-400  text-white font-semibold py-2 px-4 rounded shadow text-center transition">
             Cancelar
         </a>
     </div>
