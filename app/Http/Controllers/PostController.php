@@ -34,9 +34,21 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
+
         $post = Post::findOrFail($id);
         $post->title = $request->input('title');
         $post->content = $request->input('content');
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('posts', 'public');
+            $post->image_path = '/posts/' . $path;
+        }
+
         $post->save();
         return redirect()->route('posts.show', $post->id)->with('success', 'Post actualizado correctamente.');
     }
@@ -46,13 +58,22 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         $post = new Post();
         $post->title = $request->input('title');
         $post->content = $request->input('content');
+        $post->category_id = $request->input('category_id');
         // $post->user_id = auth()->id();
         $post->user_id = 1; //para testear siempre voy a usar el id 1
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('posts', 'public');
+            $post->image_path = '/posts/' . $path;
+        }
+
         $post->save();
 
         return redirect()->route('posts.index')->with('success', 'Post creado correctamente.');

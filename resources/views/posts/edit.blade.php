@@ -19,6 +19,17 @@
         </div>
 
         <div>
+            <label for="title" class="block text-gray-700 font-semibold mb-2">Título:</label>
+            <input
+                type="file"
+                accept="image/*"
+                name="image"
+                id="image"
+                value="{{ $post->image_path }}"
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <div>
             <label for="content" class="block text-gray-700 font-semibold mb-2">Contenido:</label>
             <textarea
                 name="content"

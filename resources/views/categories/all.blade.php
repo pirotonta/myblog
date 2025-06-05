@@ -61,7 +61,7 @@ $user = auth()->user();
 
 
             <img
-                src="{{ $post->thumbnail ?? $post->category->icon }}"
+                src="{{ $post->category->icon }}"
                 alt="icon"
                 class="w-25 h-25 rounded object-cover" />
         </article>

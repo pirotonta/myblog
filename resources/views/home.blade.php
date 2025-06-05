@@ -54,7 +54,7 @@ $user = auth()->user();
                 <a href="{{ route('categories.show', $post->category->id) }}"
                     class="ml-2 px-2 py-0.5 inline-flex items-center justify-center rounded-full text-xs font-semibold text-white bg-red-500 hover:bg-red-400 transition">
                     {{ mb_strtoupper($post->category->name, 'UTF-8') }}
-                    <img src="{{ $post->thumbnail ?? $post->category->icon }}"
+                    <img src="{{$post->category->icon}}"
                         alt="icon"
                         class="w-5 ml-2 rounded object-cover" />
                 </a>
@@ -65,6 +65,11 @@ $user = auth()->user();
             </p>
         </div>
 
+        @if ($post->image_path != null)
+        <img src="{{ $post->image_path }}"
+            alt="imagen del post"
+            class="w-25 h-25 rounded object-cover" />
+        @endif
     </article>
     @endforeach
     <div class="mt-10">

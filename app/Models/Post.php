@@ -14,7 +14,7 @@ class Post extends Model
         'user_id',
         'category_id',
         'habilitated',
-        'thumbnail',
+        'image_path',
         'content'
     ];
 

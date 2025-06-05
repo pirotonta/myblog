@@ -11,7 +11,7 @@
 
     <div class="flex justify-center space-x-15 mb-5">
         <div class="flex items-center space-x-1 mt-2">
-            <img class="w-8" src="./images/github-icon.svg" alt="icono-github" />
+            <img class="w-8" src="/icons/github-icon.svg" alt="icono-github" />
             <a class="font-semibold hover:text-red-400"
                 href="https://github.com/pirotonta"
                 target="_blank">
@@ -19,7 +19,7 @@
             </a>
         </div>
         <div class="flex items-center space-x-1 mt-2">
-            <img class="w-8" src="./images/github-icon.svg" alt="icono-github" />
+            <img class="w-8" src="/icons/github-icon.svg" alt="icono-github" />
             <a class="font-semibold hover:text-red-400"
                 href="https://github.com/MorenoGise"
                 target="_blank">

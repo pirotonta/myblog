@@ -23,7 +23,7 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->boolean('habilitated')->default(false);
-            $table->string('thumbnail')->nullable();
+            $table->string('image_path')->nullable();
             $table->integer('rating')->default(0);
             $table->integer('views')->default(0);
             $table->text('content');

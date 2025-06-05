@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'getHome'])->name('home');
 
-Route::resource('posts', PostController::class);
+Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth')->name('posts.create');
+
+Route::resource('posts', PostController::class)->except(['create']);
 
 Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
 

@@ -22,7 +22,7 @@ class PostFactory extends Factory
             'user_id' => User::factory(),
             'category_id' => Category::inRandomOrder()->first()?->id ?? 1,
             'habilitated' => true,
-            'thumbnail' => null,
+            'image_path' => null,
             'content' => $this->faker->paragraphs(3, true),
             'rating' => $this->faker->numberBetween(-10, 20),
             'views' => $this->faker->numberBetween(0, 1000),
