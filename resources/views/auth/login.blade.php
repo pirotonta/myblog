@@ -1,12 +1,12 @@
 <x-guest-layout>
-    <div class="max-w-md mx-auto h-100 bg-zinc-900 rounded-xl shadow-md p-8 border border-zinc-700">
+    <div class="max-w-md mx-auto h-100 bg-zinc-900 shadow-md rounded-md p-8 border border-zinc-700">
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <form method="POST" action="{{ route('login') }}" class="space-y-6">
             @csrf
-            <h3 class="font-bold text-2xl mb-10">Iniciar sesión</h3>
+            <h3 class="font-bold text-2xl mb-10 text-white">Iniciar sesión</h3>
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" class="text-gray-300" />
@@ -47,7 +47,7 @@
 
             <!-- Submit -->
             <div class="flex justify-end">
-                <x-primary-button class="hover:bg-indigo-500 text-white font-semibold px-4 py-2 rounded-md cursor-pointer">
+                <x-primary-button class="text-white font-semibold px-4 py-2 rounded-md cursor-pointer">
                     Ingresar
                 </x-primary-button>
             </div>

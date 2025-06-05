@@ -10,7 +10,7 @@ $categories = Category::all();
             {{-- Logo --}}
             <a href="{{ route('home') }}">
                 <div class="flex items-center text-white text-3xl font-bold">
-                    <img class="w-8 mr-2" src="./images/forum-icon.svg" alt="icono-github" />
+                    <img class="w-8 mr-2" src="/images/forum-icon.svg" alt="icono-github" />
                     <span class="hover:text-red-400 transition">Bloggit</span>
                 </div>
             </a>
@@ -19,7 +19,7 @@ $categories = Category::all();
                 <li class="relative group">
                     <div class="cursor-pointer hover:text-red-400 transition inline-flex items-center">
                         <span>Temas</span>
-                        <img class="w-4 ml-1 relative top-[2px]" src="./images/chevron-down.png" alt="chevron icon" />
+                        <img class="w-4 ml-1 relative top-[2px]" src="/images/chevron-down.png" alt="chevron icon" />
                     </div>
                     <ul class="absolute hidden group-hover:flex flex-col bg-zinc-900 text-white py-2 rounded z-50 min-w-[150px] top-full left-0 text-sm">
                         <li>

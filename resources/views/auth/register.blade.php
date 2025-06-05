@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="max-w-md mx-auto bg-zinc-900 rounded-xl shadow-md p-8 border border-zinc-700">
+    <div class="max-w-md mx-auto bg-zinc-900 shadow-md rounded-md p-8 border border-zinc-700">
 
         <form method="POST" action="{{ route('register') }}" class="space-y-6">
             @csrf
@@ -63,7 +63,7 @@
 
             <!-- Submit -->
             <div class="flex justify-end">
-                <x-primary-button class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2 rounded-md cursor-pointer">
+                <x-primary-button class="text-white font-semibold px-4 py-2 rounded-md cursor-pointer">
                     Registrarme
                 </x-primary-button>
             </div>
