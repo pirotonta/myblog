@@ -1,20 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="text-3xl font-bold mb-6 text-center">Crear nuevo post</h1>
-
-<form action="{{ route('posts.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md max-w-2xl mx-auto">
+<form action="{{ route('posts.store') }}" method="POST" class="bg-zinc-900 p-6 rounded-lg shadow-md max-w-2xl mx-auto border border-zinc-700">
     @csrf
 
+    <h3 class="text-2xl font-bold text-white mb-6 text-center">Crear nuevo post</h3>
+
     <div class="mb-4">
-        <label for="title" class="block text-gray-700 font-semibold mb-2">Título:</label>
+        <label for="title" class="block text-gray-300 font-semibold mb-2">Título:</label>
         <input type="text" name="title" id="title"
-            class="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
     </div>
 
     <div class="mb-4">
-        <label for="category_id">Categoria:</label>
-        <select name="category_id" id="category_id">
+        <label for="category_id" class="block text-gray-300 font-semibold mb-2">Categoría:</label>
+        <select name="category_id" id="category_id"
+            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             @foreach ($categorias as $categoria)
             <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
             @endforeach
@@ -22,25 +23,23 @@
     </div>
 
     <div class="mb-4">
-        <label for="content" class="block text-gray-700 font-semibold mb-2">Contenido:</label>
+        <label for="content" class="block text-gray-300 font-semibold mb-2">Contenido:</label>
         <textarea
             name="content"
             id="content"
             rows="5"
-            class="w-full border border-gray-300 p-3 rounded-md resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
     </div>
 
-    <div class="text-center">
+    <div class="flex justify-center gap-4 mt-6">
         <button type="submit"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow">
+            class="w-32 bg-gray-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow transition">
             Publicar
         </button>
-        <a
-            class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-6 py-3 rounded-md transition"
-            href="{{ route('posts.index') }}">
+        <a href="{{ route('posts.index') }}"
+            class="w-32 hover:bg-blue-700 border border-bg-gray-400 text-white font-semibold py-2 px-4 rounded shadow text-center transition">
             Cancelar
         </a>
     </div>
 </form>
-
 @endsection
