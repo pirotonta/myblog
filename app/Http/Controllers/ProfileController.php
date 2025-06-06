@@ -57,4 +57,22 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function updateAvatar(Request $request)
+    {
+        $request->validate([
+            'profile_picture' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+
+        if ($user) {
+            $user->profile_picture = $request->profile_picture;
+            $user->save();
+
+            return back()->with('status', 'Avatar actualizado.');
+        }
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
 }
