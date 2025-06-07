@@ -18,6 +18,9 @@ class VoteController extends Controller
         $user = Auth::user();
 
         if (!$user) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Debes iniciar sesión para votar.'], 401);
+            }
             return redirect()->route('login')->with('error', 'Debes iniciar sesión para votar.');
         }
 
@@ -33,6 +36,16 @@ class VoteController extends Controller
             $post->votes()->create([
                 'user_id' => $user->id,
                 'value' => $request->value,
+            ]);
+        }
+
+        if ($request->expectsJson()) {
+            $newVoteCount = $post->votes()->sum('value');
+            $currentUserVote = $post->userVote($user);
+            return response()->json([
+                'message' => 'Voto registrado correctamente.',
+                'newVoteCount' => $newVoteCount,
+                'currentUserVote' => $currentUserVote ? $currentUserVote->value : 0,
             ]);
         }
 

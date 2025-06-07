@@ -1,25 +1,26 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CategoryController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{HomeController, PostController, UserController, CommentController, ProfileController, CategoryController, VoteController};
+use Illuminate\Support\Facades\{Route};
 
 Route::get('/', [HomeController::class, 'getHome'])->name('home');
+Route::get('/posts/', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/submit-post', [PostController::class, 'store'])->name('posts.store');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
-Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth')->name('posts.create');
-
-Route::resource('posts', PostController::class)->except(['create']);
+Route::middleware('auth')->group(function () {
+    Route::resource('posts', PostController::class)->except(['index', 'show']);
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+});
 
 Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
 
-Route::get('categories/{category}/posts', [PostController::class, 'index'])
-    ->name('categories.posts.index')
-    ->where('category', '[0-9]+');
+Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('search');
 
 Route::middleware('auth')->group(function () {
-    Route::post('/posts/{post}/vote', [PostController::class, 'vote'])->name('posts.vote');
+    Route::post('/posts/{post}/vote', [VoteController::class, 'vote'])->name('posts.vote');
 });
 
 Route::get('/dashboard', function () {
@@ -32,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::patch('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
 });
+
+Route::get('/profile/{username}', [ProfileController::class, 'showPublic'])->name('profile.public');
 
 // rutas de autenticación de usuarios
 require __DIR__ . '/auth.php';

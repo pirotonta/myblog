@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)
                 ->constrained()
-                ->onDelete('restrict');
+                ->onDelete('cascade');
             $table->foreignIdFor(Post::class)
                 ->constrained()
                 ->onDelete('cascade');

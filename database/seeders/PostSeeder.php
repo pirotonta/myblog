@@ -21,31 +21,31 @@ class PostSeeder extends Seeder
                 'title' => '¿Por qué David Lynch es el maestro del cine moderno?',
                 'category' => 'cine',
                 'content' => 'Anoche volví a ver "Eraserhead" y cada vez me convenzo más de que Lynch no hace películas, hace experiencias sensoriales. ¿Alguien más siente que "Inland Empire" se entiende mejor después de varios visionados?',
-                'image_path' => '/posts/eraserhead.jpg'
+                'image_path' => 'storage/posts/eraserhead.jpg'
             ],
             [
                 'title' => 'Antonioni y el arte de no decir nada con estilo',
                 'category' => 'cine',
                 'content' => 'Estuve releyendo ensayos sobre "L\'Eclisse" y creo que el vacío narrativo de Antonioni es su forma de hablarnos de la incomunicación. No es aburrido: es existencialismo puro.',
-                'image_path' => '/posts/antonioni.jpg'
+                'image_path' => 'storage/posts/antonioni.jpg'
             ],
             [
                 'title' => '¿Es "El Padrino" la mejor película de todos los tiempos?',
                 'category' => 'cine',
                 'content' => 'Recién vi "El Padrino" y me sigue pareciendo una obra maestra. ¿Alguien más piensa que la actuación de Marlon Brando es insuperable? ¿O prefieren "Apocalypse Now"?',
-                'image_path' => '/posts/godfather.jpg'
+                'image_path' => 'storage/posts/godfather.jpg'
             ],
             [
                 'title' => '¿Qué opinan de la trilogía de "El Señor de los Anillos"?',
                 'category' => 'cine',
                 'content' => 'Siempre me ha fascinado cómo Peter Jackson logró capturar la esencia de los libros. ¿Alguien más piensa que la versión extendida de "Las Dos Torres" es la mejor película de fantasía jamás hecha?',
-                'image_path' => '/posts/lotr.jpg'
+                'image_path' => 'storage/posts/lotr.jpg'
             ],
             [
                 'title' => '¿Es "Blade Runner" una película de culto o un clásico moderno?',
                 'category' => 'cine',
                 'content' => 'Recién vi "Blade Runner 2049" y me dejó pensando en cómo el cine sci-fi ha evolucionado. ¿Alguien más cree que la original es insuperable o prefieren la secuela?',
-                'image_path' => '/posts/bladerunner.jpg'
+                'image_path' => 'storage/posts/bladerunner.jpg'
             ],
 
             // música
@@ -53,31 +53,31 @@ class PostSeeder extends Seeder
                 'title' => '¿Es "OK Computer" el mejor disco de la historia?',
                 'category' => 'música',
                 'content' => 'Recién escuché "OK Computer" y me sigue volando la cabeza. ¿Alguien más piensa que es un disco que define una era? ¿O prefieren algo más reciente como "A Moon Shaped Pool"?',
-                'image_path' => '/posts/okcomputer.jpg'
+                'image_path' => 'storage/posts/okcomputer.jpg'
             ],
             [
                 'title' => '¿Qué opinan de la evolución de Björk?',
                 'category' => 'música',
                 'content' => 'Desde "Debut" hasta "Fossora", Björk ha cambiado tanto. ¿Creen que su música sigue siendo tan innovadora o se está repitiendo? A mí me encanta cómo siempre busca nuevos sonidos.',
-                'image_path' => '/posts/bjork.jpg'
+                'image_path' => 'storage/posts/bjork.jpg'
             ],
             [
                 'title' => '¿Es "The Dark Side of the Moon" el disco más sobrevalorado?',
                 'category' => 'música',
                 'content' => 'No me malinterpreten, amo a Pink Floyd, pero siento que "The Dark Side of the Moon" es un disco que se ha vuelto casi un cliché. ¿Alguien más piensa que hay discos menos conocidos de la banda que son igual de buenos?',
-                'image_path' => '/posts/darksideofthemoon.jpg'
+                'image_path' => 'storage/posts/darksideofthemoon.jpg'
             ],
             [
                 'title' => '¿Es "Kid A" el último gran disco conceptual?',
                 'category' => 'música',
                 'content' => 'Radiohead rompió todos los esquemas con "Kid A". Me impresiona cómo aún hoy suena como algo salido del futuro. ¿Qué opinan? ¿Fue su punto más alto o prefieren "OK Computer"?',
-                'image_path' => '/posts/kida.jpg'
+                'image_path' => 'storage/posts/kida.jpg'
             ],
             [
                 'title' => 'Hablemos de "The Velvet Underground & Nico"',
                 'category' => 'música',
                 'content' => 'No sé ustedes, pero creo que sin este disco no existiría casi ninguna banda indie actual. Su crudeza, la producción de Warhol, todo es arte puro. ¿Alguien más lo tiene en vinilo?',
-                'image_path' => '/posts/velvetunderground.jpg'
+                'image_path' => 'storage/posts/velvetunderground.jpg'
             ],
 
             // mascotas
@@ -85,7 +85,7 @@ class PostSeeder extends Seeder
                 'title' => 'Mi gato no deja de mirarme raro',
                 'category' => 'mascotas',
                 'content' => "Desde ayer mi gato se queda parado mirándome fijo desde la puerta. ¿Es normal? ¿Le pasa a alguien más con sus gatos o estoy viviendo el comienzo de una película de terror felina?",
-                'image_path' => '/posts/gatomirando.jpg'
+                'image_path' => 'storage/posts/gatomirando.jpg'
             ],
             [
                 'title' => 'Mi perra aprendió a abrir la heladera',
@@ -108,13 +108,13 @@ class PostSeeder extends Seeder
                 'title' => 'Me quedé encerrado en el baño del trabajo',
                 'category' => 'me pasó',
                 'content' => "Fue una experiencia surrealista. El pestillo se rompió y tuve que pedir ayuda por debajo de la puerta. ¿Alguien más ha tenido un momento así de incómodo en el trabajo?",
-                'image_path' => '/posts/encerrado.jpg'
+                'image_path' => 'storage/posts/encerrado.jpg'
             ],
             [
                 'title' => 'Me olvidé las llaves dentro del auto y tuve que llamar a un cerrajero',
                 'category' => 'me pasó',
                 'content' => "Fue un día horrible, pero al menos el cerrajero era muy simpático. ¿A alguien más le ha pasado algo así? ¿Algún truco para no olvidar las llaves?",
-                'image_path' => '/posts/llavesauto.jpg'
+                'image_path' => 'storage/posts/llavesauto.jpg'
             ],
             [
                 'title' => 'Me encontré con un ex en el supermercado y fue incómodo',
@@ -142,7 +142,7 @@ class PostSeeder extends Seeder
                 'title' => 'Sobre el remake de Resident Evil 4',
                 'category' => 'off-topic',
                 'content' => "Tengo sentimientos encontrados con el remake. Por un lado, el sistema de combate mejoró un montón, pero por otro, siento que perdió algo de la atmósfera original. ¿A ustedes qué les pareció?",
-                'image_path' => '/posts/re4.jpg'
+                'image_path' => 'storage/posts/re4.jpg'
             ],
             [
                 'title' => '¿Es normal que me dé miedo la oscuridad a los 30?',
@@ -153,7 +153,7 @@ class PostSeeder extends Seeder
                 'title' => 'Redescubrí Pikmin y me voló la cabeza',
                 'category' => 'off-topic',
                 'content' => "Siempre pensé que Pikmin era un jueguito simpático nomás, pero rejugando la saga me doy cuenta que tiene una estrategia que roza lo filosófico.",
-                'image_path' => '/posts/pikmin.jpg'
+                'image_path' => 'storage/posts/pikmin.jpg'
             ],
             [
                 'title' => '¿Por qué la gente ama tanto a Dark Souls?',
@@ -169,7 +169,7 @@ class PostSeeder extends Seeder
                 'title' => '¿Qué opinan de la serie de Castlevania en Netflix?',
                 'category' => 'off-topic',
                 'content' => "Me encantó cómo adaptaron el lore del juego. ¿Alguien más piensa que es una de las mejores series animadas que han salido últimamente?",
-                'image_path' => '/posts/castlevania.jpg'
+                'image_path' => 'storage/posts/castlevania.jpg'
             ],
         ];
 

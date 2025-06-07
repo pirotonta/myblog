@@ -7,7 +7,7 @@
                 @if ($paginator->firstItem())
                 <span class="font-medium text-white">{{ $paginator->firstItem() }}</span>-<span class="font-medium text-white">{{ $paginator->lastItem() }}</span>
                 @else
-                {{ $paginator->count() }}
+                {{ $paginator->count()}}
                 @endif
                 de
                 <span class="font-medium text-white">{{ $paginator->total() }}</span>

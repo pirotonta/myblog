@@ -6,19 +6,19 @@
 
             <h3 class="font-bold text-2xl mb-10 text-white">Crear cuenta</h3>
 
-            <!-- Name -->
+            <!-- Username -->
             <div>
-                <x-input-label for="name" :value="__('Nombre de usuario')" class="text-gray-300" />
+                <x-input-label for="username" :value="__('Nombre de usuario')" class="text-gray-300" />
                 <x-text-input
-                    id="name"
+                    id="username"
                     class="block mt-1 w-full bg-transparent border border-zinc-700 text-gray-100 focus:ring-indigo-500 focus:border-indigo-500"
                     type="text"
-                    name="name"
-                    :value="old('name')"
+                    name="username"
+                    :value="old('username')"
                     required
                     autofocus
-                    autocomplete="name" />
-                <x-input-error :messages="$errors->get('name')" class="mt-2 text-sm text-red-400" />
+                    autocomplete="username" />
+                <x-input-error :messages="$errors->get('username')" class="mt-2 text-sm text-red-400" />
             </div>
 
             <!-- Email Address -->

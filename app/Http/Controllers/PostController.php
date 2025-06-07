@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         $posts = Post::orderBy('id', 'desc')->paginate(10);
@@ -17,6 +20,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
+        $post->increment('views');
         return view('posts.show', compact('post'));
     }
 
@@ -29,6 +33,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize('update', $post);
         return view('posts.edit', compact('post'));
     }
 
@@ -41,12 +46,13 @@ class PostController extends Controller
         ]);
 
         $post = Post::findOrFail($id);
+        $this->authorize('update', $post);
         $post->title = $request->input('title');
         $post->content = $request->input('content');
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('posts', 'public');
-            $post->image_path = '/posts/' . $path;
+            $post->image_path = '/storage/' . $path;
         }
 
         $post->save();
@@ -66,16 +72,24 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->content = $request->input('content');
         $post->category_id = $request->input('category_id');
-        // $post->user_id = auth()->id();
-        $post->user_id = 1; //para testear siempre voy a usar el id 1
+        $post->user_id = Auth::id();
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('posts', 'public');
-            $post->image_path = '/posts/' . $path;
+            $post->image_path = '/storage/' . $path;
         }
 
         $post->save();
 
-        return redirect()->route('posts.index')->with('success', 'Post creado correctamente.');
+        return redirect()->route('posts.show', $post->id)->with('success', 'Post creado correctamente.');;
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $this->authorize('delete', $post);
+
+        $post->delete();
+        return redirect()->route('home')->with('success', 'Post eliminado.');
     }
 }

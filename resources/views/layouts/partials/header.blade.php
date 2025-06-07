@@ -1,8 +1,3 @@
-@php
-use App\Models\Category;
-$categories = Category::all();
-@endphp
-
 <header class="sticky top-0 bg-zinc-950 z-50 h-16 flex items-center">
     <nav class="w-full max-w-7xl mx-auto flex justify-between items-center px-4">
 
@@ -22,11 +17,6 @@ $categories = Category::all();
                         <img class="w-4 ml-1 relative top-[2px]" src="/icons/chevron-down.png" alt="chevron icon" />
                     </div>
                     <ul class="absolute hidden group-hover:flex flex-col bg-zinc-900 text-white py-2 rounded z-50 min-w-[150px] top-full left-0 text-sm">
-                        <li>
-                            <a href="{{ route('posts.index') }}" class="block px-4 py-2 hover:bg-zinc-800">
-                                Ver todo
-                            </a>
-                        </li>
                         @foreach ($categories as $category)
                         <li>
                             <a href="{{ route('categories.show', $category->id) }}" class="block px-4 py-2 hover:bg-zinc-800">
@@ -45,6 +35,47 @@ $categories = Category::all();
                 </li>
             </ul>
         </div>
+
+        {{-- Search input --}}
+
+        <div x-data="liveSearch()" @click.away="open = false" class="relative">
+            <input
+                type="text"
+                placeholder="Buscar posts o usuarios..."
+                class="p-1.5 bg-zinc-900 px-4 border border-gray-700 text-gray-300 w-96 rounded-md shadow-sm"
+                @input.debounce.300ms="fetchResults"
+                x-model="query"
+                @focus="open = true" />
+
+            <div x-show="open && query.length > 0" class="absolute mt-1 bg-zinc-800 w-full z-50 rounded shadow">
+                <template x-if="results.length === 0">
+                    <div class="p-2 text-gray-400">No hay resultados</div>
+                </template>
+                <!-- posts -->
+                <template x-if="results.filter(r => r.type === 'post').length > 0">
+                    <div>
+                        <div class="mt-2 px-4 py-1 text-xs uppercase tracking-wide text-gray-400">Posts</div>
+                        <template x-for="item in results.filter(r => r.type === 'post')" :key="item.id">
+                            <a :href="item.url" class="block px-4 py-2 hover:bg-zinc-700 text-white transition"
+                                x-text="item.label"></a>
+                        </template>
+                    </div>
+                </template>
+                <!-- usuarios -->
+                <template x-if="results.filter(r => r.type === 'user').length > 0">
+                    <div>
+                        <div class="px-4 py-1 text-xs uppercase tracking-wide text-gray-400">Usuarios</div>
+                        <template x-for="item in results.filter(r => r.type === 'user')" :key="item.id">
+                            <a :href="item.url" class="block px-4 py-2 hover:bg-zinc-700 text-white transition"
+                                x-text="item.label"></a>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+
+        {{-- User menu --}}
 
         <ul class="flex items-center space-x-4">
             @if (Route::has('login'))
@@ -94,3 +125,45 @@ $categories = Category::all();
         </ul>
     </nav>
 </header>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('liveSearch', () => ({
+            query: '',
+            results: [],
+            open: false,
+
+            async fetchResults() {
+                if (this.query.length === 0) {
+                    this.results = [];
+                    return;
+                }
+
+                const res = await fetch(`/search?q=${encodeURIComponent(this.query)}`);
+                const data = await res.json();
+
+                this.results = [];
+
+                data.posts.forEach(post => {
+                    this.results.push({
+                        id: post.id,
+                        type: 'post',
+                        label: `${post.title}`,
+                        url: `/posts/${post.id}`
+                    });
+                });
+
+                data.users.forEach(user => {
+                    this.results.push({
+                        id: user.id + '-user',
+                        type: 'user',
+                        label: `${user.username}`,
+                        url: `/profile/${user.username}`
+                    });
+                });
+
+                this.open = true;
+            }
+        }));
+    });
+</script>

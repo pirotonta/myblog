@@ -23,20 +23,6 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $pfps = [
-            '\userpfps\Bluebear_NH_Villager_Icon.png',
-            '\userpfps\Cookie_NH_Villager_Icon.png',
-            '\userpfps\Harvey_NH_Character_Icon.png',
-            '\userpfps\Henry_NH_Villager_Icon.png',
-            '\userpfps\Lolly_NH_Villager_Icon.png',
-            '\userpfps\Mabel_NH_Character_Icon.png',
-            '\userpfps\Marshal_NH_Villager_Icon.png',
-            '\userpfps\Nookling_NH_Character_Icon.png',
-            '\userpfps\Scoot_NH_Villager_Icon.png',
-            '\userpfps\Villager_NH_Character_Icon.png',
-        ];
-
-
         $sustantivos = [
             'guiso',
             'caniche',
@@ -88,7 +74,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'profile_picture' => fake()->randomElement($pfps),
+            'profile_picture' => '/userpfps/' . fake()->numberBetween(1, 10) . '.png',
         ];
     }
 

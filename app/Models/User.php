@@ -49,4 +49,28 @@ class User extends Authenticatable
             'habilitado' => 'boolean',
         ];
     }
+
+    /**
+     * Get the posts for the user.
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Get the comments for the user.
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Get the user's votes
+     */
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
 }

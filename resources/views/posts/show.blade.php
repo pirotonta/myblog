@@ -9,11 +9,11 @@
     </p>
     @if ($post->image_path)
     <div id="image-wrapper" class="mb-6 flex flex-col sm:flex-row gap-4 items-start whitespace-pre-line">
-        <img id="post-image" 
-             src="{{ $post->image_path }}" 
-             alt="imagen del post" 
-             class="max-w-full max-h-[200px] rounded shadow object-contain" />
-        
+        <img id="post-image"
+            src="{{ asset($post->image_path) }}"
+            alt="imagen del post"
+            class="max-w-full max-h-[200px] rounded shadow object-contain" />
+
         <p id="post-text" class="text-gray-700">{{ $post->content }}</p>
     </div>
     @else
@@ -21,17 +21,26 @@
     <p class="text-gray-300 mb-6 whitespace-pre-line leading-relaxed">{{ $post->content }}</p>
     @endif
 
+    @can('update', $post)
     <a href="{{ url('/posts/' . $post->id . '/edit') }}"
         class="inline-block text-gray-400 hover:text-red-400 font-semibold transition mb-6">
         Editar post
     </a>
+    @endcan
+
+    @can('delete', $post)
+    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit">Eliminar</button>
+    </form>
+    @endcan
 
     <section class="mt-4">
         <h3 class="text-xl text-gray-900 font-semibold my-4 border-b border-zinc-600 pb-2 text-white">Comentarios</h3>
         @auth
-        <form action="{{ route('comments.store') }}" method="POST" class="mt-6">
+        <form action="{{ route('comments.store', ['post' => $post->id]) }}" method="POST" class="mt-6">
             @csrf
-            <input type="hidden" name="post_id" value="{{ $post->id }}">
             <textarea name="content" rows="3" required
                 class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Escribe tu comentario..."></textarea>
@@ -51,7 +60,13 @@
             <p class="text-sm font-semibold text-gray-100 mb-1">{{ $comment->user->username }}</p>
             <p class="text-gray-300 text-sm leading-relaxed">{{ $comment->content }}</p>
         </div>
-
+        @can('delete', $comment)
+        <form method="POST" action="{{ route('comments.destroy', $comment->id) }}">
+            @csrf
+            @method('DELETE')
+            <button class="text-red-400 text-sm">Eliminar</button>
+        </form>
+        @endcan
         @empty
         <p class="text-gray-500 italic ml-4">Este post aún no tiene comentarios.</p>
         @endforelse
@@ -69,23 +84,23 @@
 
 @section('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const img = document.getElementById('post-image');
-    const div = document.getElementById('image-wrapper');
+    document.addEventListener('DOMContentLoaded', () => {
+        const img = document.getElementById('post-image');
+        const div = document.getElementById('image-wrapper');
 
-    if (img && div) {
-        img.onload = function () {
-            const vertical = img.naturalHeight > img.naturalWidth;
+        if (img && div) {
+            img.onload = function() {
+                const vertical = img.naturalHeight > img.naturalWidth;
 
-            if (vertical) {
-                div.classList.remove('flex-col');
-                div.classList.add('flex-row');
-            } else {
-                div.classList.remove('flex-row');
-                div.classList.add('flex-col');
-            }
-        };
-    }
-});
+                if (vertical) {
+                    div.classList.remove('flex-col');
+                    div.classList.add('flex-row');
+                } else {
+                    div.classList.remove('flex-row');
+                    div.classList.add('flex-col');
+                }
+            };
+        }
+    });
 </script>
 @endsection

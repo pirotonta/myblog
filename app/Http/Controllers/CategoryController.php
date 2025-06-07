@@ -35,10 +35,17 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $category = Category::findOrFail($id);
-        $posts = $category->posts()->with(['user', 'category'])->latest()->paginate(10);
+        $sort = $request->get('sort', 'latest');
+
+        $posts = $category->posts()
+            ->with(['user', 'category'])
+            ->sorted($sort)
+            ->paginate(10)
+            ->withQueryString();
+
         return view('categories.show', compact('category', 'posts'));
     }
 

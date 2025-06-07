@@ -8,9 +8,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\{Post, User};
 
 class ProfileController extends Controller
 {
+    /**
+     * Display any user's profile.
+     */
+    public function showPublic($username)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        $userActual = Auth::user();
+
+        $posts = Post::with(['votes' => function ($query) use ($userActual) {
+            if ($userActual) {
+                $query->where('user_id', $userActual->id);
+            }
+        }])
+            ->where('user_id', $user->id)
+            ->paginate(10);
+
+        return view('profile.public', compact('user', 'posts', 'userActual'));
+    }
+
     /**
      * Display the user's profile form.
      */
@@ -68,11 +88,9 @@ class ProfileController extends Controller
 
         if ($user) {
             $user->profile_picture = $request->profile_picture;
-            $user->save();
+            $request->user()->save();
 
             return back()->with('status', 'Avatar actualizado.');
         }
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 }

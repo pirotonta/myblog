@@ -13,11 +13,11 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Nombre de usuario')" class="text-gray-300" />
-            <x-text-input id="name" name="name" type="text"
+            <x-input-label for="username" :value="__('Nombre de usuario')" class="text-gray-300" />
+            <x-text-input id="username" name="username" type="text"
                 class="mt-1 block w-full bg-zinc-800 border-zinc-700 text-white rounded-md shadow-sm"
-                :value="old('name', $user->username)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2 text-red-400" :messages="$errors->get('name')" />
+                :value="old('username', $user->username)" required autofocus autocomplete="username" />
+            <x-input-error class="mt-2 text-red-400" :messages="$errors->get('username')" />
         </div>
 
         <div>

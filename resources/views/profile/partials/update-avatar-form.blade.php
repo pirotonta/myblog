@@ -1,15 +1,15 @@
 @php
 $avatars = [
-'userpfps/Bluebear_NH_Villager_Icon.png',
-'userpfps/Cookie_NH_Villager_Icon.png',
-'userpfps/Harvey_NH_Character_Icon.png',
-'userpfps/Henry_NH_Villager_Icon.png',
-'userpfps/Lolly_NH_Villager_Icon.png',
-'userpfps/Mabel_NH_Character_Icon.png',
-'userpfps/Marshal_NH_Villager_Icon.png',
-'userpfps/Nookling_NH_Character_Icon.png',
-'userpfps/Scoot_NH_Villager_Icon.png',
-'userpfps/Villager_NH_Character_Icon.png',
+'/userpfps/1.png',
+'/userpfps/2.png',
+'/userpfps/3.png',
+'/userpfps/4.png',
+'/userpfps/5.png',
+'/userpfps/6.png',
+'/userpfps/7.png',
+'/userpfps/8.png',
+'/userpfps/9.png',
+'/userpfps/10.png',
 ];
 @endphp
 

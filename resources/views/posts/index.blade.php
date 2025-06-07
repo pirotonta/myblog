@@ -65,7 +65,7 @@ $user = auth()->user();
             </p>
         </div>
         @if ($post->image_path != null)
-        <img src="{{ $post->image_path }}"
+        <img src="{{ asset($post->image_path) }}"
             alt="imagen del post"
             class="w-25 h-25 rounded object-cover" />
         @endif
