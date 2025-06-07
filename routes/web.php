@@ -4,13 +4,11 @@ use App\Http\Controllers\{HomeController, PostController, UserController, Commen
 use Illuminate\Support\Facades\{Route};
 
 Route::get('/', [HomeController::class, 'getHome'])->name('home');
-Route::get('/posts/', [PostController::class, 'index'])->name('posts.index');
-Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('/submit-post', [PostController::class, 'store'])->name('posts.store');
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::resource('posts', PostController::class);
 
 Route::middleware('auth')->group(function () {
-    Route::resource('posts', PostController::class)->except(['index', 'show']);
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 });
