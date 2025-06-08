@@ -1,7 +1,7 @@
 <header class="sticky top-0 bg-zinc-950 z-50 h-16 flex items-center">
-    <nav class="w-full max-w-7xl mx-auto flex justify-between items-center px-4">
+    <nav class="w-full max-w-7xl mx-auto flex justify-between items-center px-2">
 
-        <div class="flex items-center space-x-12">
+        <div class="flex items-center space-x-5">
             {{-- Logo --}}
             <a href="{{ route('home') }}">
                 <div class="flex items-center text-white text-3xl font-bold">
@@ -12,8 +12,8 @@
 
             <ul class="flex items-center ml-10 space-x-10 text-white text-lg font-semibold">
                 <li class="relative group">
-                    <div class="cursor-pointer hover:text-red-400 transition inline-flex items-center">
-                        <span>Temas</span>
+                    <div class="cursor-pointer hover:text-red-400 transition inline-flex items-center font-medium text-normal">
+                        Temas
                         <img class="w-4 ml-1 relative top-[2px]" src="/icons/chevron-down.png" alt="chevron icon" />
                     </div>
                     <ul class="absolute hidden group-hover:flex flex-col bg-zinc-900 text-white py-2 rounded z-50 min-w-[150px] top-full left-0 text-sm">
@@ -26,31 +26,44 @@
                         @endforeach
                     </ul>
                 </li>
+                @auth
                 <li>
-                    <a href="{{ route('posts.create') }}" class="hover:text-red-400 transition">
-                        <div class="cursor-pointer hover:text-red-400 transition inline-flex items-center">
-                            Crear post +
-                        </div>
-                    </a>
+                    <x-navbar-link :href="route('posts.create')">
+                        Crear post
+                    </x-navbar-link>
                 </li>
+                <li>
+                    <x-navbar-link :href="route('profile.public', $post->user->username)">
+                        Mis posts
+                    </x-navbar-link>
+                </li>
+                @endauth
             </ul>
         </div>
 
         {{-- Search input --}}
+        <div x-data="liveSearch()" @click.away="open = false" class="relative w-96">
+            <div class="relative">
+                <input
+                    type="text"
+                    placeholder="Buscar posts o usuarios..."
+                    class="p-1.5 pr-10 bg-zinc-900 px-4 border border-zinc-600 text-gray-300 w-full rounded-md shadow-sm"
+                    @input.debounce.300ms="fetchResults"
+                    x-model="query"
+                    @focus="open = true" />
 
-        <div x-data="liveSearch()" @click.away="open = false" class="relative">
-            <input
-                type="text"
-                placeholder="Buscar posts o usuarios..."
-                class="p-1.5 bg-zinc-900 px-4 border border-gray-700 text-gray-300 w-96 rounded-md shadow-sm"
-                @input.debounce.300ms="fetchResults"
-                x-model="query"
-                @focus="open = true" />
+                <!-- icono lupa -->
+                <img src="/icons/search.svg"
+                    alt="Buscar"
+                    class="w-5 h-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" />
+            </div>
 
+            <!-- resultados -->
             <div x-show="open && query.length > 0" class="absolute mt-1 bg-zinc-800 w-full z-50 rounded shadow">
                 <template x-if="results.length === 0">
                     <div class="p-2 text-gray-400">No hay resultados</div>
                 </template>
+
                 <!-- posts -->
                 <template x-if="results.filter(r => r.type === 'post').length > 0">
                     <div>
@@ -61,6 +74,7 @@
                         </template>
                     </div>
                 </template>
+
                 <!-- usuarios -->
                 <template x-if="results.filter(r => r.type === 'user').length > 0">
                     <div>
@@ -74,9 +88,7 @@
             </div>
         </div>
 
-
         {{-- User menu --}}
-
         <ul class="flex items-center space-x-4">
             @if (Route::has('login'))
             @auth
@@ -107,17 +119,11 @@
             </li>
             @else
             <li>
-                <a href="{{ route('login') }}"
-                    class="inline-block px-5 py-1.5 border border-gray-600 text-sm text-white rounded-sm hover:border-red-400 transition">
-                    Iniciar sesión
-                </a>
+                <x-boton-link :href="route('login')">Iniciar sesión</x-boton-link>
             </li>
             @if (Route::has('register'))
             <li>
-                <a href="{{ route('register') }}"
-                    class="inline-block px-5 py-1.5 border border-gray-600 text-sm text-white rounded-sm hover:border-red-400 transition">
-                    Crear cuenta
-                </a>
+                <x-boton-link :href="route('register')">Crear cuenta</x-boton-link>
             </li>
             @endif
             @endauth

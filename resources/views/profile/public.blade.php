@@ -25,7 +25,9 @@ $userActual = auth()->user();
     @php
     $userVote = $userActual ? $post->votes->first() : null;
     @endphp
-    <x-post-card :post="$post" :userVote="$userVote"></x-post-card>
+    <div class="mt-3">
+        <x-post-card :post="$post" :userVote="$userVote"></x-post-card>
+    </div>
     @empty
     <p class="text-gray-400">Este usuario no ha publicado nada aún.</p>
     @endforelse

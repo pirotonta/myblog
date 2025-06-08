@@ -9,13 +9,13 @@
     <div class="mb-4">
         <label for="title" class="block text-gray-300 font-semibold mb-2">Título:</label>
         <input type="text" name="title" id="title"
-            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md">
     </div>
 
     <div class="mb-4">
         <label for="category_id" class="block text-gray-300 font-semibold mb-2">Categoría:</label>
         <select name="category_id" id="category_id"
-            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md">
             @foreach ($categorias as $categoria)
             <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
             @endforeach
@@ -25,11 +25,11 @@
     <div class="mb-4">
         <label class="block text-gray-300 font-semibold mb-2" for="image">Subir imagen:</label>
 
-        <div class="relative w-full">
+        <div class="relative w-full border hover:border-red-400 rounded-md">
             <input type="file" name="image" id="image" accept="image/*"
                 class="peer absolute inset-0 opacity-0 z-50 cursor-pointer w-full h-full" />
 
-            <div class="bg-zinc-800 w-full border border-zinc-600 rounded-md text-white px-5 py-2 text-center peer-hover:border-blue-500 peer-hover:ring-2 peer-hover:ring-blue-500 transition">
+            <div class="bg-zinc-800 w-full border border-zinc-600 rounded-md text-white px-5 py-2 text-center">
                 Seleccionar archivo
             </div>
         </div>
@@ -43,18 +43,15 @@
             name="content"
             id="content"
             rows="5"
-            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md resize-y focus:outline-none focus:ring-2 focus:ring-gray-500"></textarea>
+            class="w-full bg-zinc-800 text-white border border-zinc-600 p-3 rounded-md resize-y"></textarea>
     </div>
 
     <div class="flex justify-center gap-4 mt-6">
         <button type="submit"
-            class="w-32 border border-gray-500 cursor-pointer hover:border-red-400 text-white font-semibold py-2 px-4 rounded shadow transition">
+            class="w-32 border border-gray-600 cursor-pointer hover:border-red-400 text-white font-semibold py-2 px-4 rounded shadow transition">
             Publicar
         </button>
-        <a href="{{ url()->previous() }}"
-            class="w-32 border border-gray-500 cursor-pointer hover:border-red-400  text-white font-semibold py-2 px-4 rounded shadow text-center transition">
-            Cancelar
-        </a>
+        <x-boton-link :href="url()->previous()">Cancelar</x-boton-link>
     </div>
 </form>
 @endsection

@@ -2,7 +2,7 @@
 
 <article class="bg-zinc-900 border border-zinc-700 shadow-md rounded-md p-6 flex items-center gap-4">
     <div class="flex flex-col items-center justify-center">
-        <form method="POST" action="{{ route('posts.vote', $post) }}" class="vote-form" data-post-id="{{ $post->id }}"> 
+        <form method="POST" action="{{ route('posts.vote', $post) }}" class="vote-form" data-post-id="{{ $post->id }}">
             @csrf
             <input type="hidden" name="value" value="1">
             <button type="submit"
@@ -17,7 +17,7 @@
         </form>
 
         <span class="post-rating {{ $post->rating() > 0 ? 'text-green-500' : ($post->rating() < 0 ? 'text-red-500' : 'text-gray-400') }}"
-    data-post-id="{{ $post->id }}">
+            data-post-id="{{ $post->id }}">
             {{ $post->rating() }}
         </span>
 
