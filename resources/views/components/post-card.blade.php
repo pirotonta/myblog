@@ -6,7 +6,7 @@
             @csrf
             <input type="hidden" name="value" value="1">
             <button type="submit"
-                class="{{ $userVote && $userVote->value === 1 ? 'text-green-600 font-bold' : 'text-gray-400 hover:text-green-500' }}">
+                class="{{ $userVote && $userVote->value === 1 ? 'text-green-600 font-bold' : 'text-gray-400 hover:text-green-500' }} cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round"
@@ -25,7 +25,7 @@
             @csrf
             <input type="hidden" name="value" value="-1">
             <button type="submit"
-                class="{{ $userVote && $userVote->value === -1 ? 'text-red-700 font-bold' : 'text-gray-400 hover:text-red-600' }}">
+                class="{{ $userVote && $userVote->value === -1 ? 'text-red-700 font-bold' : 'text-gray-400 hover:text-red-600' }} cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round"

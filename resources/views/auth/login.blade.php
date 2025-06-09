@@ -9,17 +9,17 @@
             <h3 class="font-bold text-2xl mb-10 text-white">Iniciar sesión</h3>
             <!-- Email Address -->
             <div>
-                <x-input-label for="email" :value="__('Email')" class="text-gray-300" />
+                <x-input-label for="email" :value="__('User/email')" class="text-gray-300" />
                 <x-text-input
-                    id="email"
+                    id="login"
                     class="block mt-1 w-full border border-zinc-700 text-gray-100 focus:ring-indigo-500 focus:border-indigo-500"
-                    type="email"
-                    name="email"
-                    :value="old('email')"
+                    type="text"
+                    name="login"
+                    :value="old('login')"
                     required
                     autofocus
                     autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2 text-sm text-red-400" />
+                <x-input-error :messages="$errors->get('login')" class="mt-2 text-sm text-red-400" />
             </div>
 
             <!-- Password -->

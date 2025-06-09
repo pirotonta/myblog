@@ -41,6 +41,8 @@ class VoteController extends Controller
 
         if ($request->expectsJson()) {
             $newVoteCount = $post->votes()->sum('value');
+            $post->rating = $newVoteCount;
+            $post->save();
             $currentUserVote = $post->userVote($user);
             return response()->json([
                 'message' => 'Voto registrado correctamente.',

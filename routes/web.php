@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{HomeController, PostController, UserController, CommentController, ProfileController, CategoryController, VoteController};
+use App\Http\Controllers\{HomeController, PostController, SearchController, CommentController, ProfileController, CategoryController, VoteController};
 use Illuminate\Support\Facades\{Route};
 
 Route::get('/', [HomeController::class, 'getHome'])->name('home');
@@ -15,7 +15,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
 
-Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('search');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/vote', [VoteController::class, 'vote'])->name('posts.vote');

@@ -26,14 +26,14 @@
                         @endforeach
                     </ul>
                 </li>
-                @auth
                 <li>
                     <x-navbar-link :href="route('posts.create')">
                         Crear post
                     </x-navbar-link>
                 </li>
+                @auth
                 <li>
-                    <x-navbar-link :href="route('profile.public', $post->user->username)">
+                    <x-navbar-link :href="route('profile.public', auth()->user()->username)">
                         Mis posts
                     </x-navbar-link>
                 </li>
